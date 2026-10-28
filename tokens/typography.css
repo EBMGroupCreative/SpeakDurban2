@@ -1,0 +1,15 @@
+:root{
+--font-grotesk:'Switzer','Helvetica Neue',Arial,sans-serif;
+--font-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+--font-pixel:'Geist Pixel',monospace;
+--fs-display:clamp(64px,8.4vw,128px);/* @kind font */--fs-h1:72px;--fs-h2:44px;--fs-h3:28px;--fs-h4:20px;
+--fs-body:15px;--fs-small:13px;--fs-label:11px;--fs-micro:10px;
+--lh-tight:0.88;/* @kind font */
+--lh-head:1.05;/* @kind font */
+--lh-body:1.55;/* @kind font */
+
+--tracking-display:-0.02em;--tracking-caps:0.14em;--tracking-label:0.06em;
+--wdth-display:88;/* @kind font */
+--wdth-body:100;/* @kind font */
+
+}

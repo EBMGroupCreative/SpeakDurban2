@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="32 lessons of real Durban slang, a final exam, and a certificate of fluency redeemable at Gateway, Durban. A public service by Gateway."><title>Learn to Speak Durban — A public service by Gateway</title>
+<link rel="stylesheet" href="styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="js/lsd-components.js"></script>
+<script>window.LSD_ASSETS='assets/';</script>
+<script src="js/data.js"></script>
+<style>html,body{margin:0}body{background:var(--bg-graph);background-attachment:fixed;color:var(--ink);font-family:var(--font-mono)}a{color:var(--ink)}a:hover{background:var(--yellow)}*{box-sizing:border-box}</style></head><body><div id="root"></div>
+<script type="text/babel" src="js/shell.jsx"></script>
+<script type="text/babel" src="js/forms.jsx"></script>
+<script type="text/babel" src="js/landing.jsx"></script>
+<script type="text/babel" src="js/dictionary.jsx"></script>
+<script type="text/babel" src="js/exam.jsx"></script>
+<script type="text/babel" src="js/activities.jsx"></script>
+<script type="text/babel" src="js/games.jsx"></script>
+<script type="text/babel" src="js/merch.jsx"></script>
+<script type="text/babel" src="js/enrol.jsx"></script>
+<script type="text/babel" src="js/submit-word.jsx"></script>
+<script type="text/babel" src="js/study.jsx"></script>
+<script type="text/babel" src="js/student-card.jsx"></script>
+<script type="text/babel" src="js/flashcards.jsx"></script>
+<script type="text/babel">
+const PAGES=['enrol','home','dict','exam','act','merch','submit','study','card','flash'];
+const parse=()=>{const [p,s]=location.hash.replace('#','').split('/');if(!p)return {page:localStorage.getItem('lsd-enrolled')?'home':'enrol'};return {page:PAGES.includes(p)?p:'home',state:s};};
+function useWidth(){const [w,setW]=React.useState(window.innerWidth);React.useEffect(()=>{const f=()=>setW(window.innerWidth);addEventListener('resize',f);return()=>removeEventListener('resize',f);},[]);return w;}
+function MobileTabs({page,go,mobile}){return <div style={{display:'flex',gap:6,overflowX:'auto',scrollbarWidth:'none',padding:'0 16px',borderBottom:'2px solid var(--ink)',background:'var(--paper)',position:'sticky',top:mobile?58:66,zIndex:19}}>{NAV_ITEMS.map(n=><button key={n.id} onClick={()=>go(n.id)} style={{flex:'none',padding:'7px 10px',marginBottom:-2,border:'2px solid var(--ink)',borderBottom:page===n.id?'2px solid var(--yellow)':'2px solid var(--ink)',borderRadius:'6px 6px 0 0',background:page===n.id?'var(--yellow)':'var(--paper-2)',fontFamily:'var(--font-mono)',fontSize:11,color:'var(--ink)'}}><b>{n.index}</b> {n.label.toLowerCase()}</button>)}</div>;}
+function App(){
+  const [{page,state},setR]=React.useState(parse);
+  const [cart,setCart]=React.useState(0);
+  const vw=useWidth();const mobile=vw<760;const compactNav=vw<1400;
+  React.useEffect(()=>{const f=()=>{setR(parse());window.scrollTo(0,0);};addEventListener('hashchange',f);return()=>removeEventListener('hashchange',f);},[]);
+  const go=p=>{location.hash=p;};
+  const key=page+'/'+(state||'');
+  if(page==='enrol') return <div data-screen-label="enrol"><Enrol key={key} mobile={mobile} initial={state} onDone={go}/></div>;
+  const screens={home:<Landing go={go} mobile={mobile}/>,dict:<Dictionary/>,exam:<Exam key={key} go={go} initial={state}/>,act:<Activities key={key} initialError={state==='error'?'Wetsuit':null} game={state&&state.indexOf('game-')===0?state:null}/>,merch:<Merch cart={cart} setCart={setCart}/>,submit:<SubmitWord key={key} initial={state} mobile={mobile}/>,study:<Study go={go}/>,card:<StudentCard mobile={mobile}/>,flash:<Flashcards/>};
+  return <div data-screen-label={page}><Masthead page={page} go={go} cart={cart} mobile={mobile} compactNav={compactNav}/>{compactNav&&<MobileTabs page={page} go={go} mobile={mobile}/>}<main style={{maxWidth:'var(--page-max)',margin:'0 auto',padding:mobile?'0 16px':'0 64px'}}>{screens[page]}</main><Footer mobile={mobile}/></div>;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script></body></html>

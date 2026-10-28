@@ -1,0 +1,7 @@
+:root{
+--bg-graph:linear-gradient(var(--grid-line) 1px,transparent 1px) 0 0/var(--grid-size) var(--grid-size),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px) 0 0/var(--grid-size) var(--grid-size),var(--paper);
+--bg-dots:radial-gradient(var(--grid-dot) 1px,transparent 1.2px) 0 0/var(--dot-size) var(--dot-size),var(--paper-2);
+--bg-hatch:repeating-linear-gradient(135deg,var(--ink) 0 1.5px,transparent 1.5px 6px);
+}
+.lsd-graph{background:var(--bg-graph)}
+.lsd-dots{background:var(--bg-dots)}

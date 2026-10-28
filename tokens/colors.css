@@ -1,0 +1,11 @@
+:root{
+--ink:#111111;--ink-2:#3a3a38;--ink-3:#6b6a66;
+--paper:#f2f1ec;--paper-2:#fbfaf6;--paper-3:#e4e3dd;--paper-4:#d4d3cc;
+--grid-line:#d9d8d1;--grid-dot:#c9c8c0;
+--yellow:#ff5a2e;--yellow-2:#e8461a;--accent:var(--yellow);--yellow-ink:#111111;
+--white:#ffffff;
+--text-primary:var(--ink);--text-secondary:var(--ink-2);--text-muted:var(--ink-3);--text-inverse:var(--paper-2);
+--surface-ground:var(--paper);--surface-card:var(--paper-2);--surface-strip:var(--paper-3);--surface-inverse:var(--ink);--surface-highlight:var(--yellow);
+--border-strong:var(--ink);--border-hair:var(--ink-3);--border-faint:var(--paper-4);
+--state-active:var(--yellow);--state-hover:var(--paper-3);--state-pressed:var(--ink);
+}
